@@ -1,0 +1,16 @@
+{
+    "name": "user_base",
+    "version": "0.0.1",
+    "description": "",
+    "main": "./app.js",
+    "scripts": {
+     
+    },
+    "author": "Dmytro Pavlenko",
+    "license": "ISC",
+    "dependencies": {
+        "express": "4.16.4",
+        "mongoose": "5.5.3"
+    }
+  }
+  
