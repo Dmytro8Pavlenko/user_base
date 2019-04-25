@@ -3,7 +3,9 @@
     "version": "0.0.1",
     "description": "",
     "main": "./app.js",
-    "scripts": {},
+    "scripts": {
+        "buildandmove": "cd ./react-app/build/ && copyfiles ./* inFile ../../public/"
+    },
     "author": "Dmytro Pavlenko",
     "license": "ISC",
     "dependencies": {
