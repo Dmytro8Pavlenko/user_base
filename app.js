@@ -6,7 +6,7 @@ const port = 8009;
 
 const app = express();
 
-app.use('public', express.static('public'));
+app.use(express.static('public'));
 
 
 const options = {
