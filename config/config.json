@@ -1,0 +1,17 @@
+{
+    "recordsOnPage": 5,
+    "defaultSortConfig": {
+        "sortField": "first_name",
+        "direction": -1
+    },
+    "mongoose": {
+        "uri": "mongodb://admin:1357vis@ds147096.mlab.com:47096/user_base",
+        "options": {
+            "server": {
+                "socketOpptions": {
+                    "keepAlive": 1
+                }
+            }
+        }
+    }
+}

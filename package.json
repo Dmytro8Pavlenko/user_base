@@ -3,14 +3,14 @@
     "version": "0.0.1",
     "description": "",
     "main": "./app.js",
-    "scripts": {
-     
-    },
+    "scripts": {},
     "author": "Dmytro Pavlenko",
     "license": "ISC",
     "dependencies": {
+        "async": "^2.6.2",
         "express": "4.16.4",
-        "mongoose": "5.5.3"
+        "express-form-data": "^2.0.8",
+        "mongoose": "5.5.3",
+        "nconf": "^0.10.0"
     }
-  }
-  
+}
