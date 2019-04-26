@@ -4,7 +4,12 @@ body {
   font-family: sans-serif;
 }
 
-.user{
+.user {
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px 100px 100px;
+  grid-template-columns: 100px 100px 100px 150px 100px 100px 100px 800px;
+}
+
+.user .column {
+  border: 1px solid #000;
+  border-collapse: collapse;
 }

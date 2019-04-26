@@ -12,22 +12,24 @@ class UserList extends Component {
       users: [],
     }
   };
-  getUsers() {
+  updateRecords(page = 1) {
     axios.post('./get_users', {
-      page: 1,
-    }).then((res) => {
-      this.setState({
-        users: res.data,
-      })
+      page: page,
+    }).then(this.handleResponse)
+  };
+
+  handleResponse(res) {
+    this.setState({
+      users: res.data,
     })
-  }
+  };
   componentWillMount = () => {
-    this.getUsers();
+    this.updateRecords();
   };
 
   render() {
     const userList = this.state.users.map((item) => (
-      <User userData={item} />
+      <User userData={item} key={item._id} />
     ));
     return (
       <div className="user-list">

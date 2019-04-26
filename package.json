@@ -4,7 +4,7 @@
     "description": "",
     "main": "./app.js",
     "scripts": {
-        "buildandmove": "cd ./react-app/ && npm run build && cd ./build/*  && copyfiles ./** inFile ../../public/"
+        "build": "cd ./react-app/ && npm run build && cd ./build/* && copyfiles ./** inFile ../../public/"
     },
     "author": "Dmytro Pavlenko",
     "license": "ISC",
