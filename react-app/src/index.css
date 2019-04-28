@@ -9,7 +9,28 @@ body {
   grid-template-columns: 100px 100px 100px 150px 100px 100px 100px 800px;
 }
 
+
 .user .column {
   border: 1px solid #000;
   border-collapse: collapse;
+}
+
+.user-form .row {
+  display: grid;
+  grid-template-columns: 150px 500px;
+}
+
+.sort-selection{
+  
+  display: grid;
+  grid-template-columns: 150px 150px;
+}
+
+.sort-selection p{
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.current{
+  font-weight: bold;
 }

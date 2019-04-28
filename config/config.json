@@ -7,6 +7,7 @@
     "mongoose": {
         "uri": "mongodb://admin:1357vis@ds147096.mlab.com:47096/user_base",
         "options": {
+            "useNewUrlParser": true,
             "server": {
                 "socketOpptions": {
                     "keepAlive": 1

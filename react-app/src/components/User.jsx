@@ -4,16 +4,14 @@ import axios from 'axios';
 
 class User extends Component {
   removeRecord(id) {
-    axios.post('./remove_users', {
-      user_id: id,
-    }).then(() => {
+    axios.delete(`./users/${id}`).then(() => {
       this.dispatchUpdateOnParrent();
     })
   }
   dispatchUpdateOnParrent() {
     this.props.updateRecords();
   }
-  onClick() {
+  onClick = () => {
     const userID = this.props.userData._id;
     this.removeRecord(userID);
   }

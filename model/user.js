@@ -6,7 +6,7 @@ const schema = new Schema({
         type: String,
         required: true,
     },
-    'last_naame ': {
+    'last_name': {
         type: String,
         required: true,
     },

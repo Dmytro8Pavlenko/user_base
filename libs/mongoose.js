@@ -4,8 +4,6 @@ const config = require('../config');
 
 const mongooseConfig = config.get('mongoose')
 
-mongoose.connect(mongooseConfig.uri, mongooseConfig.config, (err) => {
-    console.log(err);
-});
+mongoose.connect(mongooseConfig.uri, mongooseConfig.config);
 
 module.exports = mongoose;
