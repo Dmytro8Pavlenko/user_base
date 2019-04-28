@@ -14,11 +14,13 @@ class AddUser extends Component {
     });
   }
 
-  onFieldChange (fieldName){ (e) => {
-    const value = e.target.value;
-    this.setState({
-      [fieldName]: value,
-    });
+  onFieldChange(fieldName) {
+    return (e) => {
+      const value = e.target.value;
+      this.setState({
+        [fieldName]: value,
+      });
+    }
   }
 
   onSubmit = (e) => {
@@ -26,7 +28,8 @@ class AddUser extends Component {
     this.addRecord(this.state);
   }
 
-  render = () =>(
+  render() {
+    return (
       <form className="user-form" onSubmit={this.onSubmit}>
         <div className="row"><span>first-name</span><input type="text" className="first-name" onChange={this.onFieldChange('first_name')} required /></div>
         <div className="row"><span>last-name</span><input type="text" className="last-name" onChange={this.onFieldChange('last_name')} required /></div>
