@@ -1,7 +1,7 @@
 const express = require('express');
 var bodyParser = require('body-parser')
 
-const port = 8009;
+const config = require('./config');
 
 const app = express();
 
@@ -16,6 +16,6 @@ app.use(bodyParser.json())
 
 require('./router')(app);
 
-app.listen(port, () => {
-    console.log(`listening ${port}`);
+app.listen(process.env.PORT || config.get("port"), () => {
+    console.log(`listening ${process.env.PORT || config.get("port")}`);
 });
