@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import User from './User';
+import User from './User.jsx';
 
 const fieldNames = {
   _id: 'id',
@@ -31,8 +31,6 @@ class UserList extends Component {
   };
 
   handleResponse = (res) => {
-    console.log(res);
-
     this.setState({
       users: res.data,
       pageCount: res.headers['pagination-count'],
@@ -49,13 +47,11 @@ class UserList extends Component {
     }, this.updateRecords);
   }
   onClickOnSortOption = (sort_by_field) => (e) => {
-    console.log('sort_by_field', sort_by_field);
     this.setState({
       sort_by_field
     }, this.updateRecords);
   }
   onClickOnSortDirectionOption = (direction) => (e) => {
-    console.log('direction', direction);
     this.setState({
       direction
     }, this.updateRecords);

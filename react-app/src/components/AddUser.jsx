@@ -4,7 +4,6 @@ import axios from 'axios';
 
 class AddUser extends Component {
   addRecord(data) {
-    console.log('data', data);
 
     axios.post('./users', {
       ...data,
@@ -15,7 +14,7 @@ class AddUser extends Component {
     });
   }
 
-  onFieldChange = (fieldName) => (e) => {
+  onFieldChange (fieldName){ (e) => {
     const value = e.target.value;
     this.setState({
       [fieldName]: value,
@@ -25,12 +24,9 @@ class AddUser extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     this.addRecord(this.state);
-    console.log('e', e);
-    console.log('this', this.state);
   }
 
-  render() {
-    return (
+  render = () =>(
       <form className="user-form" onSubmit={this.onSubmit}>
         <div className="row"><span>first-name</span><input type="text" className="first-name" onChange={this.onFieldChange('first_name')} required /></div>
         <div className="row"><span>last-name</span><input type="text" className="last-name" onChange={this.onFieldChange('last_name')} required /></div>

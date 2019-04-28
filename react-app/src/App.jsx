@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 import './App.css';
 
-import UserList from './components/UserList';
-import AddUser from './components/AddUser';
+import UserList from './components/UserList.jsx';
+import AddUser from './components/AddUser.jsx';
 
 //const history = createBrowserHistory();
 
