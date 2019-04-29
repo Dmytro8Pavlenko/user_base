@@ -11,36 +11,44 @@ const config = require('../config');
 const recordsOnPage = config.get('recordsOnPage');
 
 exports.get = function (req, res) {
-    console.log('req.params', req.params);
+    console.log('req.query', req.query);
 
-    const page = req.params.page || 1;
     const sortConfig = { [req.params.sort_by_field || '_id']: +req.params.direction || 1 };
+    const filterData = req.query;
 
+
+    let page = req.params.page || 1;
     let skipRecords = recordsOnPage * (page - 1);
 
-    console.log('[sortConfig.sortField]: sortConfig.direction', sortConfig);
-    
+
     waterfall([
         (next) => {
-            User.count({}, next);
+            User.count(filterData, next);
         },
         (count, next) => {
+            const pages = Math.ceil(count / recordsOnPage) || 1;
             if (skipRecords >= count) {
-                skipRecords = (Math.ceil(count / recordsOnPage) - 1) * recordsOnPage;
+                skipRecords = (pages - 1) * recordsOnPage;
+                page = pages;
             }
-            const pages = Math.ceil(count / recordsOnPage);
             res.set('Pagination-Count', pages);
+            res.set('Page-Number', page);
 
-            User.find({})
+            User.find(filterData)
                 .sort(sortConfig)
                 .skip(skipRecords)
                 .limit(recordsOnPage)
                 .exec(next);
+
+
         },
         (users) => {
             res.send(users);
-        },
-    ])
+        }
+    ],
+        (err) => {
+            console.log(err);
+        })
 }
 
 exports.post = function (req, res) {
@@ -53,39 +61,35 @@ exports.post = function (req, res) {
                 });
 
         },
-        (waterfallErr, err) => {
-            if (waterfallErr) {
-                console.log('err', waterfallErr);
-                res.sendStatus(500);
-            } else {
-                console.log('ok');
-                res.sendStatus(200);
-            }
+        () => {
+            console.log('added');
+            res.sendStatus(200);
         },
-    ]);
+    ],
+        (err) => {
+            console.log('err', err);
+            res.sendStatus(500);
+        });
 
 }
 
 exports.delete = function (req, res) {
     const userId = req.params.id;
-    console.log('idForRemove', userId);
 
     waterfall([
         (next) => {
             User.deleteOne({
                 '_id': userId,
-            }, (err) => {
-                next(null, err);
-            })
+            }, next)
         },
-        (waterfallErr, err) => {
-            if (waterfallErr) {
-                console.log('err', waterfallErr);
-                res.sendStatus(500);
-            } else {
-                console.log('ok');
-                res.sendStatus(200);
-            }
+        () => {
+            console.log('deleted');
+            res.sendStatus(200);
+
         },
-    ])
+    ],
+        (err) => {
+            console.log('err', err);
+            res.sendStatus(500);
+        })
 }

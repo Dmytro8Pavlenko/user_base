@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import User from './User.jsx';
+import FilterFields from './FilterFields.jsx';
 
 const fieldNames = {
   _id: 'id',
   first_name: 'First name',
   last_name: 'Last name',
   middle_name: 'Middle name',
-  date_of_birth: 'Date of birth',
+  date_of_birth: 'Age',
   salary: 'Salary',
   department: 'Department',
   profession: 'Profession',
@@ -19,6 +20,7 @@ class UserList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      filterString: '',
       users: [],
       page: 1,
       sort_by_field: '_id',
@@ -27,13 +29,16 @@ class UserList extends Component {
     }
   };
   updateRecords = () => {
-    axios.get(`./users/${this.state.page}/${this.state.sort_by_field}/${this.state.direction}`).then(this.handleResponse)
+    axios.get(`./users/${this.state.page}/${this.state.sort_by_field}/${this.state.direction}/${this.state.filterString}`).then(this.handleResponse);
   };
 
   handleResponse = (res) => {
+    console.log('res.data', res.data);
+
     this.setState({
-      users: res.data,
-      pageCount: res.headers['pagination-count'],
+      users: res.data || [],
+      page: +res.headers['page-number'],
+      pageCount: +res.headers['pagination-count'],
     })
   };
   componentWillMount = () => {
@@ -57,8 +62,25 @@ class UserList extends Component {
     }, this.updateRecords);
   }
   isCurrent(number) {
-    const newPage = this.state.page > this.state.pageCount ? this.state.pageCount : this.state.page;
-    return number === newPage;
+    return number === this.state.page;
+  }
+
+  onFilterChange = (filterData) => {
+    let filterString = '';
+    if (filterData) {
+      filterString = '?'
+      for (let key in filterData) {
+        if (filterData[key]) {
+          filterString += `${key}=${filterData[key]}&`
+        };
+      };
+    }
+    console.log('filterString', filterString);
+    this.setState(
+      {
+        filterString,
+      }, this.updateRecords
+    );
   }
 
   render() {
@@ -86,9 +108,14 @@ class UserList extends Component {
       <div>
         <div className="sort-selection">
           <div>
+            <FilterFields onChange={this.onFilterChange} />
+          </div>
+          <div className="sort-options">
+            <p>Sort</p>
             {fieldSortOptions}
           </div>
-          <div>
+          <div className="sort-direction">
+            <p></p>
             <p>
               <input id="sortDown" name="sort_direction" type="radio" value={1} onClick={this.onClickOnSortDirectionOption(1)} checked={this.state.direction === 1} />
               <label for="sortDown">Sort down</label>

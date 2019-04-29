@@ -20,10 +20,13 @@ body {
   grid-template-columns: 150px 500px;
 }
 
-.sort-selection{
-  
+.sort-selection{  
   display: grid;
-  grid-template-columns: 150px 150px;
+  grid-template-columns: 150px 150px 150px;
+}
+
+.sort-selection .user-form .row, .sort-selection .sort-options p, .sort-selection .sort-direction p{
+ height: 21px;
 }
 
 .sort-selection p{
